@@ -29,7 +29,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos       // inline test dataset
+      todos,
+      isSharing : false
     };
   }
 
@@ -38,6 +39,9 @@ export default class App extends React.Component {
       <div class="wrapper">
         <div class="container" id="main">
           <h1>Playlistr</h1>
+          <div>
+            {this.renderShareSection()}
+          </div>
           <CreateTodo todos={this.state.todos} createTask={this.createTask.bind(this)}/>
           <TodosList
               todos= { this.state.todos }
@@ -69,12 +73,6 @@ export default class App extends React.Component {
       "isCompleted" : false
     };
       this.state.todos.push(songEntry);
-    // });
-    // this.state.todos.push({
-    //   task,
-    //   artist,
-    //   isCompleted: false
-    // });
     this.setState( { todos: this.state.todos });
   }
 
@@ -88,4 +86,26 @@ export default class App extends React.Component {
     _.remove(this.state.todos, todo => todo.task === taskToDelete);
     this.setState({ todos: this.state.todos });
   }
+  shareClick() {
+    this.setState( { isSharing : true } );
+  }
+
+  renderShareSection() {
+    // console.log(this.state.isSharing);
+    if( this.state.isSharing ) {
+      return (
+        <div>
+          <input type="text" readOnly={true} value="http://playlistr/dansplaylists/id/12312321"/>
+        </div>
+      );
+    }
+    else {
+      return (
+        <div>
+          <img onClick={this.shareClick.bind(this)} src="http://cdn.shopify.com/s/files/1/0099/9562/products/026-Social-Sharing-Template-Widget-Hero-Icon_2048x2048.png?v=1423737372" style={{width: 150 + "px", cursor: 'pointer'}}/>
+        </div>
+      );
+    }
+  }
+
 }

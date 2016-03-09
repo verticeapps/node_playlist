@@ -12,12 +12,11 @@ export default class TodosListItem extends React.Component {
   render() {
     return (
         <tr>
-          {this.renderTaskSection()}
-          {this.renderArtistSection()}
-          {this.renderYoutubeSection()}
-          {this.renderSpotifySection()}
-          {this.renderActionSection()}
-
+          { this.renderTaskSection() }
+          { this.renderArtistSection() }
+          { this.renderYoutubeSection() }
+          { this.renderSpotifySection() }
+          { this.renderActionSection() }
         </tr>
     );
   }
@@ -60,22 +59,28 @@ export default class TodosListItem extends React.Component {
   }
   renderYoutubeSection() {
     const { task, artist, isCompleted } = this.props;
+    const btnStyles = {
+      cursor : "pointer",
+      width: 20 + "px"
+    };
     return (
       <td>
-        <img src="http://www.iconarchive.com/download/i78250/igh0zt/ios7-style-metro-ui/MetroUI-YouTube-Alt-2.ico" style={{width:20 + "px"}} />
+        <img src="http://www.iconarchive.com/download/i78250/igh0zt/ios7-style-metro-ui/MetroUI-YouTube-Alt-2.ico" style={btnStyles} />
       </td>
     );
   }
   renderSpotifySection() {
     const { task, artist, isCompleted } = this.props;
+    const btnStyles = {
+      cursor : "pointer",
+      width: 20 + "px"
+    };
     return (
       <td>
-        <img src="http://icons.iconarchive.com/icons/froyoshark/enkel/512/Spotify-icon.png" style={{width: 20 + "px"}}/>
+        <img src="http://icons.iconarchive.com/icons/froyoshark/enkel/512/Spotify-icon.png" style={btnStyles}/>
       </td>
     );
   }
-
-
   // Edit/Save and Delete
   renderActionSection() {
     if(this.state.isEditing) {
