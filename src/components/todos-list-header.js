@@ -5,7 +5,10 @@ export default class TodosListHeader extends React.Component {
     return (
         <thead>
           <tr>
-            <th>Task</th>
+            <th>Song</th>
+            <th>Artist</th>
+            <th>Youtube</th>
+            <th>Spotify</th>
             <th>Action</th>
           </tr>
         </thead>
