@@ -35,11 +35,10 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <div className="container" id="main">
+      <div class="wrapper">
+        <div class="container" id="main">
           <h1>Playlistr</h1>
-          <h2>Share your playlist to someone</h2>
-          <CreateTodo createTask={this.createTask.bind(this)}/>
+          <CreateTodo todos={this.state.todos} createTask={this.createTask.bind(this)}/>
           <TodosList
               todos= { this.state.todos }
               toggleTask = { this.toggleTask.bind(this) }
@@ -61,12 +60,21 @@ export default class App extends React.Component {
     this.setState({ todos: this.state.todos });
   }
   // Passing this function to CreateTodo props
-  createTask(task) {
-    console.log(this);
-    this.state.todos.push({
-      task,
-      isCompleted: false
-    });
+  createTask(inputs) {
+    console.log(inputs);
+    // inputs.forEach(function(input) {
+    var songEntry = {
+      "task" : inputs[0].value,
+      "artist" : inputs[1].value,
+      "isCompleted" : false
+    };
+      this.state.todos.push(songEntry);
+    // });
+    // this.state.todos.push({
+    //   task,
+    //   artist,
+    //   isCompleted: false
+    // });
     this.setState( { todos: this.state.todos });
   }
 

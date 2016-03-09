@@ -21,7 +21,12 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
+        loader: 'babel-loader',
+        // loader: ['react-hot', 'babel?presets[]=react,presets[]=es2015'],
+        query: {
+          presets: ['react', 'es2015'],
+          plugins: ['react-html-attrs', 'transform-class-properties']
+        }
       }
     ]
   },
