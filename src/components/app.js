@@ -1,35 +1,25 @@
 import React from 'react';
+
 import CreateTodo from './create-todo';
+import CreateComment from './create-comment';
+
 import TodosList from './todos-list';
-// Temporary inline test dataset
-const todos = [
-  {
-    task: 'Gold Digger',
-    artist: 'Kanye West',
-    isCompleted: false
-  },
-  {
-    task: 'Bohemian Rhapsody',
-    artist: 'Queen',
-    isCompleted: false
-  },
-  {
-    task: 'Weird Fishes',
-    artist: 'Radiohead',
-    isCompleted: false
-  },
-  {
-    task: 'Sexy Back',
-    artist: 'Justin Timberlake',
-    isCompleted: false
-  }
-];
+import CommentList from './comments-list';
+
+import SongStore from '../stores/SongStore';
+import CommentStore from '../stores/CommentStore';
+
+
+const todos  = SongStore.getAll();
+const comments = CommentStore.getAll();
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       todos,
+      comments,
       isSharing : false
     };
   }
@@ -48,6 +38,12 @@ export default class App extends React.Component {
               toggleTask = { this.toggleTask.bind(this) }
               saveTask = { this.saveTask.bind(this) }
               deleteTask = { this.deleteTask.bind(this) }
+          />
+        </div>
+        <div class="container" id="comments">
+          <CreateComment comments = {this.state.comments} createComment={this.createComment.bind(this)}/>
+          <CommentList
+              comments= { this.state.comments }
           />
         </div>
       </div>
@@ -72,9 +68,21 @@ export default class App extends React.Component {
       "artist" : inputs[1].value,
       "isCompleted" : false
     };
-      this.state.todos.push(songEntry);
+    this.state.todos.push(songEntry);
     this.setState( { todos: this.state.todos });
   }
+
+  createComment(comment) {
+    // const { comment } = commentObj.value;
+    // const { user } = commentObj.user;
+    var commentEntry = {
+      "comment" : comment,
+      "user" : "DannyPaguiao",
+    };
+    this.state.comments.push(commentEntry);
+    this.setState( { comments: this.state.comments });
+  }
+
 
   saveTask(oldTask, newTask) {
     const foundTodo = _.find(this.state.todos, todo => todo.task === oldTask);
