@@ -43,8 +43,9 @@ export default class TodosListItem extends React.Component {
     return (
       <td style={taskStyle}
         onClick={this.props.toggleTask.bind(this, task)}
-      >
-        {task}
+      ><div class="songEntry">
+        <p>{task}</p>
+        </div>
       </td>
     );
   }
@@ -53,7 +54,9 @@ export default class TodosListItem extends React.Component {
     const { task, artist, isCompleted } = this.props;
     return (
       <td>
-        {artist}
+        <div class="artistEntry">
+          <p>{artist}</p>
+        </div>
       </td>
     );
   }
@@ -65,7 +68,9 @@ export default class TodosListItem extends React.Component {
     };
     return (
       <td>
+        <a href="http://youtube.com" target="_blank">
         <img src="http://www.iconarchive.com/download/i78250/igh0zt/ios7-style-metro-ui/MetroUI-YouTube-Alt-2.ico" style={btnStyles} />
+        </a>
       </td>
     );
   }
@@ -77,7 +82,9 @@ export default class TodosListItem extends React.Component {
     };
     return (
       <td>
+        <a href="http://spotify.com" target="_blank">
         <img src="http://icons.iconarchive.com/icons/froyoshark/enkel/512/Spotify-icon.png" style={btnStyles}/>
+        </a>
       </td>
     );
   }
@@ -86,15 +93,19 @@ export default class TodosListItem extends React.Component {
     if(this.state.isEditing) {
       return (
         <td>
-          <button onClick={this.onSaveClick.bind(this)}>Save</button>
-          <button onClick={this.onCancelClick.bind(this)}>Cancel</button>
+          <div class="actionBtns">
+          <button class="btn btn-success" onClick={this.onSaveClick.bind(this)}>Save</button>
+          <button class="btn btn-danger" onClick={this.onCancelClick.bind(this)}>Cancel</button>
+          </div>
         </td>
       );
     }
     return (
       <td>
-        <button onClick={this.onEditClick.bind(this)}>Edit</button>
-        <button onClick={this.props.deleteTask.bind(this, this.props.task)}>Delete</button>
+        <div class="actionBtns">
+        <button class="btn btn-success" onClick={this.onEditClick.bind(this)}>Edit</button>
+        <button class="btn btn-danger" onClick={this.props.deleteTask.bind(this, this.props.task)}>Delete</button>
+        </div>
       </td>
     );
   }

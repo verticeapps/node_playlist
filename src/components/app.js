@@ -95,7 +95,7 @@ export default class App extends React.Component {
     if( this.state.isSharing ) {
       return (
         <div>
-          <input type="text" readOnly={true} value="http://playlistr/dansplaylists/id/12312321"/>
+          <input autofocus type="text" value="http://playlistr/dansplaylists/id/12312321"/>
         </div>
       );
     }

@@ -23,10 +23,10 @@ export default class TodosListItem extends React.Component {
 
   render() {
     return (
-        <form onSubmit={this.handleCreate.bind(this)}>
-        <input style={{ width: 300 + "px" }} name="task" type="text" placeholder="What song do you want to add?" ref="createInput"/><br/>
-        <input style={{ width: 300 + "px" }} name="artist" type="text" placeholder="Who is the artist?" ref="createArtist"/><br/>
-        <button>Create</button>
+        <form id="createEntry" onSubmit={this.handleCreate.bind(this)}>
+        <input name="task" type="text" placeholder="What song do you want to add?" ref="createInput"/><br/>
+        <input name="artist" type="text" placeholder="Who is the artist?" ref="createArtist"/><br/>
+        <button class="btn btn-primary">Create</button>
         {this.renderError()}
         </form>
     );
@@ -49,7 +49,6 @@ export default class TodosListItem extends React.Component {
 
     }
     if(errorArr[0] != null && errorArr[1] != null) {
-      console.log('hi');
       this.setState ({ error: errorArr });
       return;
     }
@@ -57,7 +56,7 @@ export default class TodosListItem extends React.Component {
 
 
     this.setState({ error: null });
-    console.log(inputs);
+    // console.log(inputs);
     this.props.createTask(inputs);
     this.refs.createInput.value = '';
     this.refs.createArtist.value = '';
