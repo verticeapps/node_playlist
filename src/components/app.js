@@ -3,15 +3,19 @@ import React from 'react';
 import CreateTodo from './create-todo';
 import CreateComment from './create-comment';
 
+import YoutubeResults from './youtubeResults';
 import TodosList from './todos-list';
 import CommentList from './comments-list';
 
+import * as PlaylistrActions from '../actions/PlaylistrActions';
 import SongStore from '../stores/SongStore';
 import CommentStore from '../stores/CommentStore';
+import YoutubeStore from '../stores/YoutubeStore';
 
 
 const todos  = SongStore.getAll();
 const comments = CommentStore.getAll();
+const searchResults = YoutubeStore.getAll();
 
 export default class App extends React.Component {
   constructor(props) {
@@ -20,8 +24,17 @@ export default class App extends React.Component {
     this.state = {
       todos,
       comments,
-      isSharing : false
+      isSharing : false,
+      searchResults
     };
+  }
+
+  componentWillMount() {
+    YoutubeStore.on("change", () => {
+      this.setState({
+        searchResults: YoutubeStore.getAll()
+      });
+    });
   }
 
   render() {
@@ -29,6 +42,7 @@ export default class App extends React.Component {
       <div class="wrapper">
         <div class="container" id="main">
           <h1>Playlistr</h1>
+            <YoutubeResults searchResults={this.state.searchResults}/>
           <div>
             {this.renderShareSection()}
           </div>
@@ -62,7 +76,10 @@ export default class App extends React.Component {
   // Passing this function to CreateTodo props
   createTask(inputs) {
     console.log(inputs);
+    // var [ songName, songArtist ] = inputs;
+    PlaylistrActions.createSearch(inputs[0].value, inputs[1].value);
     // inputs.forEach(function(input) {
+    // console.log(this.state.searchResults[0].video);
     var songEntry = {
       "task" : inputs[0].value,
       "artist" : inputs[1].value,

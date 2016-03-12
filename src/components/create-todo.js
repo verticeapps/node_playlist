@@ -1,4 +1,5 @@
 import React from 'react';
+// import YoutubeStore from '../stores/YoutubeStore';
 
 export default class CreateTodo extends React.Component {
 
@@ -58,6 +59,7 @@ export default class CreateTodo extends React.Component {
     this.setState({ error: null });
     // console.log(inputs);
     this.props.createTask(inputs);
+    // YoutubeStore.prepareYoutubeRequest(inputs[0]);
     this.refs.createInput.value = '';
     this.refs.createArtist.value = '';
   }
